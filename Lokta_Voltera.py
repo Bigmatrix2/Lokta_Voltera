@@ -61,7 +61,7 @@ plt.title("Données réelles des populations Proie-Prédateur")
 plt.legend()
 plt.show()
 
-# Étape 3 : Comparaison modèle vs données réelles
+#Comparaison modèle vs données réelles
 plt.figure(figsize=(13, 10))
 plt.plot(time[: len(df)], lapin[: len(df)], "b-", label="Lapins (modèle)")
 plt.plot(time[: len(df)], renard[: len(df)], "r-", label="Renards (modèle)")
@@ -73,7 +73,7 @@ plt.title("Comparaison : Modèle Lotka-Volterra vs Données Réelles")
 plt.legend()
 plt.show()
 
-#Etape 4 : MSE
+#MSE
 
 # Fonction Lotka-Volterra
 def lotka_volterra_step(lapin, renard, alpha, beta, delta, gamma, step):
@@ -92,8 +92,8 @@ def lotka_volterra_step(lapin, renard, alpha, beta, delta, gamma, step):
     Returns:
         tuple: Nouvelles populations des lapins et des renards.
     """
-    new_lapin = lapin + (lapin * (alpha - beta * renard)) * step
-    new_renard = renard + (renard * (delta * lapin - gamma)) * step
+    new_lapin = (lapin * (alpha - beta * renard)) * step + lapin
+    new_renard = (renard * (delta * lapin - gamma)) * step + renard
     return new_lapin, new_renard
 
 # Fonction pour générer des prédictions avec le modèle Lotka-Volterra
@@ -159,7 +159,7 @@ _, predicted_lapins, predicted_renards = predict_lotka_volterra(
 
 # Calcul de la MSE
 error = mse_objective(real_lapins, real_renards, predicted_lapins, predicted_renards)
-print(f"Erreur quadratique moyenne (MSE) avant GridSearch: {error:.4f}")
+print(f"Erreur quadratique moyenne (MSE) après GridSearch: {error:.4f}")
 
 #Utilisation du GridSearch
 
@@ -171,6 +171,8 @@ gamma_values = [1/3, 2/3, 1, 4/3]
 
 # Liste pour stocker les résultats
 results = []
+step = 0.001
+time_steps = len(time_real) - 1
 
 # Grid Search
 for alpha in alpha_values:
