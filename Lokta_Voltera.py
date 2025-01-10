@@ -61,13 +61,19 @@ plt.title("Données réelles des populations Proie-Prédateur")
 plt.legend()
 plt.show()
 
-#Comparaison modèle vs données réelles
+# Limitation des données simulées à la longueur du DataFrame
+n_real = len(df)  # Nombre de lignes dans df
+time_simulated = np.array(time[:n_real])
+lapin_simulated = lapin[:n_real]
+renard_simulated = renard[:n_real]
+
+# Comparaison graphique
 plt.figure(figsize=(13, 10))
-plt.plot(time[: len(df)], lapin[: len(df)], "b-", label="Lapins (modèle)")
-plt.plot(time[: len(df)], renard[: len(df)], "r-", label="Renards (modèle)")
+plt.plot(df["date"], lapin_simulated, "b-", label="Lapins (modèle)")
+plt.plot(df["date"], renard_simulated, "r-", label="Renards (modèle)")
 plt.plot(df["date"], df["lapin"], "b--", label="Lapins (réels)")
 plt.plot(df["date"], df["renard"], "r--", label="Renards (réels)")
-plt.xlabel("Temps")
+plt.xlabel("Date")
 plt.ylabel("Population")
 plt.title("Comparaison : Modèle Lotka-Volterra vs Données Réelles")
 plt.legend()
@@ -171,7 +177,7 @@ gamma_values = [1/3, 2/3, 1, 4/3]
 
 # Liste pour stocker les résultats
 results = []
-step = 0.001
+step = 0.1
 time_steps = len(time_real) - 1
 
 # Grid Search
@@ -214,31 +220,3 @@ best_result = results[0]
 print("Meilleurs paramètres trouvés :")
 print(f"Alpha : {best_result['alpha']}, Beta : {best_result['beta']}, Delta : {best_result['delta']}, Gamma : {best_result['gamma']}")
 print(f"MSE minimale : {best_result['mse']:.4f}")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
