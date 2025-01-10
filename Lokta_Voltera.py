@@ -4,10 +4,10 @@ import pandas as pd
 import csv
 
 # Paramètres du modèle
-alpha = 1 / 3
-beta = 4 / 3
-delta = 4 / 3
-gamma = 1 / 3
+alpha = 1
+beta = 2 / 3
+delta = 2 / 3
+gamma = 1
 step = 0.001
 
 # Initialisation des données
@@ -148,7 +148,7 @@ time_real = np.linspace(0, 20, 100)
 real_lapins = np.sin(time_real) + 0.1
 real_renards = np.cos(time_real) + 0.1
 
-# Générer des prédictions
+# Générer des prédictions (best_params trouvé après le grid_search )
 alpha, beta, delta, gamma = 1/3, 4/3, 4/3, 1/3
 time_steps = len(time_real) - 1
 step = (time_real[-1] - time_real[0]) / time_steps
