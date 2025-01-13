@@ -4,10 +4,10 @@ import pandas as pd
 import csv
 
 # Paramètres du modèle
-alpha = 1
-beta = 2 / 3
-delta = 2 / 3
-gamma = 1
+alpha = 1 / 3
+beta = 4 / 3
+delta = 4 / 3
+gamma = 2 / 3
 step = 0.001
 
 # Initialisation des données

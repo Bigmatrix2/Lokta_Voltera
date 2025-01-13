@@ -77,10 +77,6 @@ def grid_search(step, nb_jours, ground_truth):
 
 	return time, best_lapin, best_renard
 
-print('best_lapin')
-print('best_renard')
-print('best_rmse')
-
 if __name__ == "__main__":
 
 	step = 0.001 # nombre de points par jours
